@@ -44,18 +44,18 @@ is_outlier3 <- function(cancer, cell_line_one_tumor_anno){
 
 #read in UQ normalized + log transformed CCLE and TCGA expression data
 
-CCLE= fread("github/CCLE_normalized_expression.txt", data.table = F)
+CCLE= fread("data/CCLE_normalized_expression.txt", data.table = F)
 rownames(CCLE) = CCLE$gene_ids
 CCLE = CCLE[,-1]
 
-TCGA = fread(paste("github/", cancer, "_normalized_expression.txt", sep = ""), data.table = F)
+TCGA = fread(paste("data/", cancer, "_normalized_expression.txt", sep = ""), data.table = F)
 rownames(TCGA) = TCGA$gene_ids
 TCGA = TCGA[,-1]
 
 #read in CCLE mapping info and TCGA purity info
 
-CCLE.meta = read.table("common_data/CCLE_meta_RNAseq.txt", sep = "\t", header = T, stringsAsFactors = F)
-purity_info = read.table("TCGA_Purity_Estimates.txt", header = T)
+CCLE.meta = read.table("data/CCLE_meta_RNAseq.txt", sep = "\t", header = T, stringsAsFactors = F)
+purity_info = read.table("data/TCGA_Purity_Estimates.txt", header = T)
 
 ##adjust for tumor purity if purity information available (solid tumors only)
 if (cancer == "LAML" | cancer == "DLBC"){
