@@ -1,9 +1,9 @@
 #compare expression profiles of TCGA primary tumors and CCLE cell lines; adapted from https://github.com/Bin-Chen-Lab/HCC_NEN/blob/master/tumor_cell_line/compute_tumor_cell_line_cor_update.R
 
 library(data.table)
-library(pheatmap)#
-library(gplots)#
-library(ggplot2)#
+library(pheatmap)
+library(gplots)
+library(ggplot2)
 library(pheatmap)
 library(viridis)
 library(edgeR)
@@ -70,7 +70,7 @@ if (cancer == "LAML" | cancer == "DLBC"){
   rownames(tmp.df) = rownames(TCGA)
   colnames(tmp.df) = c("pvalue", "rho")
   tmp.df$padj = p.adjust(tmp.df$pvalue)
-  tmp.df.sig = tmp.df[tmp.df$padj < 0.01 & tmp.df$rho < -0.3 & complete.cases(tmp.df),]
+  tmp.df.sig = tmp.df[tmp.df$padj < 0.01 & tmp.df$rho < -0.4 & complete.cases(tmp.df),]
   purity_genes = rownames(tmp.df.sig)
   TCGA = TCGA[!(rownames(TCGA) %in% purity_genes),]
   
@@ -172,7 +172,7 @@ pdf(paste("results/", cancer, "/", cancer, "_heatmap_TCGA_CCLE.pdf", sep=""))
 print(
   
   pheatmap(
-    mat               = cell_tumor_matrix.sub,
+    mat               = t(cell_tumor_matrix),
     color             = inferno(50),
     border_color      = NA,
     show_colnames     = T,
