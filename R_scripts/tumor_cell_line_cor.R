@@ -54,7 +54,7 @@ TCGA = TCGA[,-1]
 
 #read in CCLE mapping info and TCGA purity info
 
-CCLE.meta = read.table("data/CCLE_meta_RNAseq.txt", sep = "\t", header = T, stringsAsFactors = F)
+CCLE.meta = read.table("data/CCLE_meta.txt", sep = "\t", header = T, stringsAsFactors = F)
 purity_info = read.table("data/TCGA_Purity_Estimates.txt", header = T)
 
 ##adjust for tumor purity if purity information available (solid tumors only)
